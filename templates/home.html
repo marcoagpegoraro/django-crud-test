@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{ title }}
+
+{{ user }}
+
+{{ request.user }}
+
+{{ request.path }}
+
+{{ user.is_authenticated }}
+
+{% if user.is_authenticated %}
+
+    <br>Só se tiver autenticado 
+
+{% endif %}
+
+{% for agenda in agendas %}
+
+<li>{{agenda.name}}</li>
+<li>{{agenda.description}}</li>
+
+{% endfor %}
+
+{% endblock %}
