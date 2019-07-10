@@ -18,11 +18,38 @@
 
 {% endif %}
 
-{% for agenda in agendas %}
+<div class="card">
+  <div class="card-body">  
+    <h5 class="card-title">Adicionar agenda</h5>
+    <form action="/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title_form" class="bmd-label-floating">Titulo</label>
+            <input id="title_form"  class="form-control" type="title_form" name="title_form">
+        </div>
+        <div class="form-group">
+            <label for="description_form" class="bmd-label-floating">Descrição</label>
+            <input id="description_form" class="form-control" type="text" name="description_form">
+        </div>
+          
+        <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+    </form>
+  </div>
+</div>
+<br>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Listagem de agendas</h5>
 
-<li>{{agenda.name}}</li>
-<li>{{agenda.description}}</li>
+    {% for agenda in agendas %}
 
-{% endfor %}
+    {{agenda.title}}
+    {{agenda.description}}
+
+    {% endfor %}
+
+  </div>
+</div>
+
 
 {% endblock %}
