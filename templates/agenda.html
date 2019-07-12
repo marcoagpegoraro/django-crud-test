@@ -4,16 +4,20 @@
 
 <div style="margin: 20px" class="card">
     <div class="card-body">
-        <h5 class="card-title">Adicionar agenda</h5>
+        <h5 class="card-title">{{page_title}}</h5>
         <form action="/agenda/" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="title_form" class="bmd-label-floating">Titulo</label>
-                <input id="title_form" class="form-control" type="title_form" name="title_form">
+                <label for="id" class="bmd-label-floating">ID</label>
+                <input id="id" class="form-control" type="text" disabled name="id" value="{{agenda_master.id}}">
             </div>
             <div class="form-group">
-                <label for="description_form" class="bmd-label-floating">Descrição</label>
-                <input id="description_form" class="form-control" type="text" name="description_form">
+                    <label for="title" class="bmd-label-floating">Titulo</label>
+                    <input id="title" class="form-control" type="text" name="title" value="{{agenda_master.title}}">
+            </div>
+            <div class="form-group">
+                <label for="description" class="bmd-label-floating">Descrição</label>
+                <input id="description" class="form-control" type="text" name="description" value="{{agenda_master.description}}">
             </div>
 
             <button type="submit" class="btn btn-primary btn-raised">Submit</button>

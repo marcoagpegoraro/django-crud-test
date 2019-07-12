@@ -26,6 +26,7 @@ urlpatterns = [
     path('', home_page),
     path('agendas/', agendas_page),
     path('agenda/', agenda_page),
+    path('agenda/<int:id>', agenda_page),
     path('agenda/delete/<int:id>', delete_agenda),
     path('admin/', admin.site.urls),
 

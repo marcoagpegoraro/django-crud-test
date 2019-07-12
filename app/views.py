@@ -20,26 +20,35 @@ def agendas_page(request):
     return render(request, "agendas.html", context )
 
 
-def agenda_page(request):
-    my_title = "Hello there"
+def agenda_page(request,id=0):
+    if id == 0:
+        page_title = "Adicionar agenda"
+        agendaMaster = AgendaMaster()
+    else:
+        page_title = "Editar agenda"
+        agendaMaster = AgendaMaster.objects.get(pk=id)
 
     if request.method == 'POST':
 
         form = AgendaForm(request.POST)
 
-        print(form.errors)
-
         if form.is_valid():
-            
-            agendaMaster = AgendaMaster(title=request.POST['title_form'],description=request.POST['description_form'])
-            agendaMaster.save()
+            agendaMaster, created = AgendaMaster.objects.update_or_create(
+                id=id, 
+                title=request.POST.title, 
+                description=request.POST.description
+                )
 
-            return HttpResponseRedirect('/agendas/')
+            agendaMaster = AgendaMaster.objects.get(pk=id)
+            if created:
+                return HttpResponseRedirect('/agendas/')
+            else:
+                return HttpResponseRedirect('/agenda/' + str(id))
 
     else:
         form = AgendaForm()
 
-    context  = {"title": my_title}
+    context  = {"page_title": page_title, "agenda_master": agendaMaster}
     return render(request, "agenda.html", context )
 
 def delete_agenda(request, id):
